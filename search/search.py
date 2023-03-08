@@ -43,6 +43,16 @@ def find_games(
             if maximum_elo > (average_elo + 50):
                 continue
 
+        if time_controls:
+            no_time_control_info = "TimeControl" not in game.headers
+            if no_time_control_info:
+                continue
+
+            time_control_info = game.headers["TimeControl"]
+
+            if not any(time_control.matches(time_control_info) for time_control in time_controls):
+                continue
+
         if query and not query(game):
             continue
 
@@ -58,5 +68,12 @@ class TimeControl(Enum):
     ULTRA_BULLET = (0, 29)
     BULLET = (30, 179)
     BLITZ = (180, 479)
+    RAPID = (450, 1499)
     CLASSICAL = (1500, 21599)
     CORRESPONDENCE = (21600, 2147483647)
+
+    def matches(self, other):
+        clock, increment = other.split("+")
+        lower_bound, upper_bound = self.value
+
+        return lower_bound < int(clock) + 40 * int(increment) <= upper_bound

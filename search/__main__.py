@@ -82,14 +82,14 @@ def main():
         query = module.query
 
     time_controls = list(TimeControl)
-    if arguments.slow:
+    if arguments.fast:
         time_controls = [TimeControl.ULTRA_BULLET, TimeControl.BULLET]
 
-    if arguments.fast:
+    if arguments.slow:
         time_controls = [
             TimeControl.BLITZ,
             TimeControl.RAPID,
-            TimeControl.CCORRESPODNENCE,
+            TimeControl.CORRESPONDENCE,
         ]
 
     minimum_rating = arguments.minimum_rating
