@@ -1,0 +1,8 @@
+[project]
+name = "pgn-filter"
+version = "0.1.0"
+description = "A small program to query for games inside PGN documents"
+authors = [{ name = "Sam Ezeh", email =  "sam@ezeh.uk"}]
+
+[project.scripts]
+pgn-filter = "search:__main__.main"
