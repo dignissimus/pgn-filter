@@ -1,7 +1,9 @@
 # pgn-filter
 
-A small program to query for games inside PGN documents. You can supply basic queries using
-command line arguments and you can write more advanced queries using python scripts.
+A small program to query for games inside PGN documents.
+
+You can supply basic queries using command line arguments
+and you can write more advanced queries using python scripts.
 
 # Example queries
 ## Games starting with d4
@@ -28,9 +30,7 @@ def query(game):
 
 # Installation instructions
 ```bash
-git clone https://github.com/dignissimus/pgn-filter
-cd pgn-filter
-pip install .
+pip install pgn-filter
 ```
 
 # Program usage
