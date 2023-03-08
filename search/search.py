@@ -12,10 +12,15 @@ def find_games(
     minimum_rating_bound=None,
     maximum_rating_bound=None,
     average_rating_bound=None,
+    number_of_games=None,
 ):
+    count = 0
     while True:
         game = chess.pgn.read_game(stream)
         if not game:
+            break
+
+        if count == number_of_games:
             break
 
         should_check_elo = (
@@ -50,12 +55,16 @@ def find_games(
 
             time_control_info = game.headers["TimeControl"]
 
-            if not any(time_control.matches(time_control_info) for time_control in time_controls):
+            if not any(
+                time_control.matches(time_control_info)
+                for time_control in time_controls
+            ):
                 continue
 
         if query and not query(game):
             continue
 
+        count += 1
         yield game
 
 

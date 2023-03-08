@@ -7,7 +7,6 @@ from .search import TimeControl, find_games
 ERROR_COLOUR = "\033[91m"
 RESET_COLOUR = "\033[0m"
 
-
 def main():
     parser = ArgumentParser(
         prog="pgn-filter",
@@ -20,7 +19,16 @@ def main():
 
     parser.add_argument("-f", "--file", help="The PGN file to search through")
     parser.add_argument("-i", "--stdin", action="store_true", help="Read from STDIN")
-    parser.add_argument("-q", "--query", help="The Python file containing the query to use")
+    parser.add_argument(
+        "-q", "--query", help="The Python file containing the query to use"
+    )
+    parser.add_argument(
+        "-n",
+        "--number-of-games",
+        metavar="number",
+        type=int,
+        help="The maximum number of games to return",
+    )
     parser.add_argument(
         "-m",
         "--minimum-rating",
@@ -102,8 +110,23 @@ def main():
         minimum_rating_bound=minimum_rating,
         maximum_rating_bound=maximum_rating,
         average_rating_bound=average_rating,
+        number_of_games=arguments.number_of_games
     )
+
+    has_tqdm = False
+    try:
+        from tqdm import tqdm
+        has_tqdm = True
+    except ImportError:
+        pass
+
+    should_display_progress_bar = has_tqdm and arguments.number_of_games
+    if should_display_progress_bar:
+        progress_bar = tqdm(total=arguments.number_of_games)
+
     for game in games:
+        if should_display_progress_bar:
+            progress_bar.update(1)
         print(game)
 
     stream.close()

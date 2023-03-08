@@ -1,6 +1,6 @@
 [project]
 name = "pgn-filter"
-version = "0.1.2"
+version = "0.1.3"
 description = "A small program to query for games inside PGN documents"
 authors = [{ name = "Sam Ezeh", email =  "sam@ezeh.uk"}]
 readme = "README.md"
@@ -12,3 +12,6 @@ pgn-filter = "search:__main__.main"
 [project.urls]
 "Homepage" = "https://github.com/dignissimus/pgn-filter"
 "Bug Tracker" = "https://github.com/dignissimus/pgn-filter/issues"
+
+[project.optional-dependencies]
+tqdm = ['tqdm']
