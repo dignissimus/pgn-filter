@@ -7,6 +7,7 @@ from .search import TimeControl, find_games
 ERROR_COLOUR = "\033[91m"
 RESET_COLOUR = "\033[0m"
 
+
 def main():
     parser = ArgumentParser(
         prog="pgn-filter",
@@ -44,7 +45,11 @@ def main():
         help="The maximum rating of games to consider",
     )
     parser.add_argument(
-        "-a", "--average-rating", metavar="rating", type=int,help="The rating range to consider"
+        "-a",
+        "--average-rating",
+        metavar="rating",
+        type=int,
+        help="The rating range to consider",
     )
     parser.add_argument(
         "-F", "--fast", action="store_true", help="Only consider bullet games"
@@ -70,7 +75,6 @@ def main():
     if arguments.fast and arguments.slow:
         print(ERROR_COLOUR + "Error: --fast and --slow cannot be used together")
         error = True
-
 
     if error:
         print(RESET_COLOUR, end="")
@@ -112,12 +116,13 @@ def main():
         minimum_rating_bound=minimum_rating,
         maximum_rating_bound=maximum_rating,
         average_rating_bound=average_rating,
-        number_of_games=arguments.number_of_games
+        number_of_games=arguments.number_of_games,
     )
 
     has_tqdm = False
     try:
         from tqdm import tqdm
+
         has_tqdm = True
     except ImportError:
         pass
