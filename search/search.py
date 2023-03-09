@@ -43,9 +43,9 @@ def find_games(
         if maximum_rating_bound and maximum_elo > maximum_rating_bound:
             continue
         if average_rating_bound:
-            if minimum_elo < (average_elo - 50):
+            if minimum_elo < (average_rating_bound - 50):
                 continue
-            if maximum_elo > (average_elo + 50):
+            if maximum_elo > (average_rating_bound + 50):
                 continue
 
         if time_controls:
@@ -82,6 +82,8 @@ class TimeControl(Enum):
     CORRESPONDENCE = (21600, 2147483647)
 
     def matches(self, other):
+        if "+" not in other:
+            return False
         clock, increment = other.split("+")
         lower_bound, upper_bound = self.value
 

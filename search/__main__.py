@@ -33,16 +33,18 @@ def main():
         "-m",
         "--minimum-rating",
         metavar="rating",
+        type=int,
         help="The minimum rating of games to consider",
     )
     parser.add_argument(
         "-M",
         "--maximum-rating",
         metavar="rating",
+        type=int,
         help="The maximum rating of games to consider",
     )
     parser.add_argument(
-        "-a", "--average-rating", metavar="rating", help="The rating range to consider"
+        "-a", "--average-rating", metavar="rating", type=int,help="The rating range to consider"
     )
     parser.add_argument(
         "-F", "--fast", action="store_true", help="Only consider bullet games"
@@ -69,9 +71,9 @@ def main():
         print(ERROR_COLOUR + "Error: --fast and --slow cannot be used together")
         error = True
 
-    print(RESET_COLOUR, end="")
 
     if error:
+        print(RESET_COLOUR, end="")
         parser.print_help()
         exit()
 
@@ -127,7 +129,7 @@ def main():
     for game in games:
         if should_display_progress_bar:
             progress_bar.update(1)
-        print(game)
+        print(game, end="\n\n")
 
     stream.close()
 
