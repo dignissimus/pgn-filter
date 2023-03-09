@@ -6,7 +6,7 @@ You can supply basic queries using command line arguments
 and you can write more advanced queries using python scripts.
 
 
-# Installation instructions
+# Installation
 ```bash
 pip install pgn-filter
 ```
