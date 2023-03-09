@@ -5,6 +5,12 @@ A small program to query for games inside PGN documents.
 You can supply basic queries using command line arguments
 and you can write more advanced queries using python scripts.
 
+
+# Installation instructions
+```bash
+pip install pgn-filter
+```
+
 # Example queries
 ## Games starting with d4
 ```python
@@ -26,11 +32,6 @@ def query(game):
     if board.is_castling(move):
         return False
     return True
-```
-
-# Installation instructions
-```bash
-pip install pgn-filter
 ```
 
 # Program usage
