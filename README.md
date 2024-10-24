@@ -23,8 +23,8 @@ from chess import Board
 def query(game):
     board = Board()
     for move in game.mainline_moves():
-    if board.is_castling(move):
-        return False
+        if board.is_castling(move):
+            return False
     return True
 ```
 
