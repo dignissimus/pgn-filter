@@ -2,7 +2,7 @@ import importlib.util
 import sys
 from argparse import ArgumentParser
 
-from .search import TimeControl, find_games
+from .pgnfilter import TimeControl, find_games
 
 ERROR_COLOUR = "\033[91m"
 RESET_COLOUR = "\033[0m"

@@ -7,7 +7,7 @@ readme = "README.md"
 license = { file = "LICENSE" }
 
 [project.scripts]
-pgn-filter = "search:__main__.main"
+pgn-filter = "pgnfilter:__main__.main"
 
 [project.urls]
 "Homepage" = "https://github.com/dignissimus/pgn-filter"
