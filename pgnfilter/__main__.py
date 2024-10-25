@@ -2,13 +2,17 @@ import importlib.util
 import sys
 from argparse import ArgumentParser
 
-from .pgnfilter import TimeControl, find_games
+from .search import TimeControl, find_games
 
 ERROR_COLOUR = "\033[91m"
 RESET_COLOUR = "\033[0m"
 
 
-def main():
+def main_with_query(query):
+    main(query)
+
+
+def main(query_function=None):
     parser = ArgumentParser(
         prog="pgn-filter",
         description="A small program to query for games inside PGN documents",
@@ -20,9 +24,10 @@ def main():
 
     parser.add_argument("-f", "--file", help="The PGN file to search through")
     parser.add_argument("-i", "--stdin", action="store_true", help="Read from STDIN")
-    parser.add_argument(
-        "-q", "--query", help="The Python file containing the query to use"
-    )
+    if query_function is None:
+        parser.add_argument(
+            "-q", "--query", help="The Python file containing the query to use"
+        )
     parser.add_argument(
         "-n",
         "--number-of-games",
@@ -88,8 +93,8 @@ def main():
     if arguments.stdin:
         stream = sys.stdin
 
-    query = None
-    if arguments.query:
+    query = query_function
+    if not query and arguments.query:
         specification = importlib.util.spec_from_file_location("query", arguments.query)
         module = importlib.util.module_from_spec(specification)
         specification.loader.exec_module(module)

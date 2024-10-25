@@ -1,4 +1,5 @@
 from chess import Move
+import pgnfilter
 
 
 def query(game):
@@ -6,3 +7,6 @@ def query(game):
     if first_move[0] == Move.from_uci("d2d4"):
         return True
     return False
+
+
+pgnfilter.main(query)
